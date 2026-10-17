@@ -2,6 +2,15 @@ import { prisma } from '../src/lib/prisma';
 import bcrypt from 'bcryptjs';
 
 async function main() {
+    // Demo data must never be inserted as part of a production deployment.
+    if (process.env.NODE_ENV === 'production' || process.env.ALLOW_DEMO_SEED !== 'true') {
+        throw new Error('Demo seeding is disabled. Use an isolated development database and ALLOW_DEMO_SEED=true.');
+    }
+    const adminPassword = process.env.SEED_ADMIN_PASSWORD;
+    if (!adminPassword || adminPassword.length < 16) {
+        throw new Error('Set a unique SEED_ADMIN_PASSWORD of at least 16 characters for the demo database.');
+    }
+
     // Only seed a fresh database, so content deleted in the admin panel isn't recreated on every deploy
     if (await prisma.adminUser.count() > 0) {
         console.log('🌱 Database already seeded, skipping.');
@@ -502,7 +511,7 @@ async function main() {
 
     // Create Admin User
     console.log('Creating admin user...');
-    const hashedPassword = await bcrypt.hash('admin123', 10);
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
     await prisma.adminUser.upsert({
         where: { email: 'admin@entrehub.com' },
@@ -700,7 +709,6 @@ async function main() {
     console.log('✅ Database seeded successfully!');
     console.log('\n📝 Admin Credentials:');
     console.log('   Email: admin@entrehub.com');
-    console.log('   Password: admin123');
     console.log('\n⚠️  Please change the admin password after first login!\n');
 }
 

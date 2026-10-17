@@ -1,8 +1,10 @@
 import { SignJWT, jwtVerify } from 'jose';
 
-const JWT_SECRET = new TextEncoder().encode(
-    process.env.JWT_SECRET || 'fallback-secret-key-change-this-in-production'
-);
+const secret = process.env.JWT_SECRET;
+if (!secret || secret.length < 32) {
+    throw new Error('JWT_SECRET must contain at least 32 characters');
+}
+const JWT_SECRET = new TextEncoder().encode(secret);
 
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
 

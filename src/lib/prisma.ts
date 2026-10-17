@@ -1,63 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
-import pkg from 'pg';
-const { Pool } = pkg;
+import { Pool } from 'pg';
 
 if (!process.env.DATABASE_URL) {
     throw new Error('DATABASE_URL environment variable is not defined');
 }
 
-// SSL certificate handling is done in the pool configuration below
-
-// Prepare the connection URL with compatibility flags
-const rawUrl = process.env.DATABASE_URL;
-let connectionUrl = rawUrl;
-
-// Add libpq compatibility and sslmode if missing, to satisfy pg and Prisma 7 stricter checks
-if (!connectionUrl.includes('uselibpqcompat=')) {
-    const separator = connectionUrl.includes('?') ? '&' : '?';
-    connectionUrl += `${separator}uselibpqcompat=true`;
-}
-if (!connectionUrl.includes('sslmode=')) {
-    connectionUrl += '&sslmode=require';
-}
-
-const pool = new Pool({
-    connectionString: connectionUrl,
-    ssl: {
-        rejectUnauthorized: false // Required for Aiven's self-signed certificates
-    }
-});
-
-// Mask sensitive info in connection string for logging
-try {
-    const urlForLogging = new URL(connectionUrl);
-    console.log(`[Prisma] Connecting to database: ${urlForLogging.host}${urlForLogging.pathname}?${urlForLogging.searchParams.toString().replace(/api_key=[^&]+/, 'api_key=***')}`);
-} catch (e) {
-    console.log('[Prisma] Connecting to database');
-}
-
-const adapter = new PrismaPg(pool);
-
+// Use the provider connection string and its TLS settings unchanged.
+// Never log query arguments or results: these may contain credentials or customer data.
 const createPrismaClient = () => {
-    const client = new PrismaClient({ adapter });
-
-    return client.$extends({
-        query: {
-            async $allOperations({ model, operation, args, query }) {
-                const startTime = Date.now();
-                console.log(`\n[Prisma Query] Model: ${model}, Operation: ${operation}`);
-                console.log(`[Prisma Args] ${JSON.stringify(args, null, 2)}`);
-
-                const result = await query(args);
-
-                const duration = Date.now() - startTime;
-                console.log(`[Prisma Result] Duration: ${duration}ms`);
-                console.log(`[Prisma Data Fetched] ${JSON.stringify(result, null, 2)}\n`);
-                return result;
-            },
-        },
-    });
+    const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+    return new PrismaClient({ adapter: new PrismaPg(pool) });
 };
 
 const globalForPrisma = globalThis as unknown as {
