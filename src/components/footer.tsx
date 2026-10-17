@@ -51,7 +51,7 @@ export default function Footer() {
             </p>
 
           <address className="mt-5 not-italic text-sm leading-relaxed text-slate-300">
-              M4, Tonjonss Plaza, Station Roundabout, Kaduna, Nigeria<br />
+              Based in Nigeria. Working with clients worldwide.<br />
               <a href="tel:+2348129721560" className={linkClass}>+234 812 972 1560</a><br />
               Monday–Friday, 9am–5pm (WAT)
             </address>

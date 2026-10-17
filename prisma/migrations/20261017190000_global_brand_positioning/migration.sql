@@ -1,0 +1,1 @@
+UPDATE "Author" SET bio = 'Gabriel Adinga writes about websites, search visibility and practical digital marketing for personal brands and growing businesses at Entrehub Services.', "updatedAt" = CURRENT_TIMESTAMP WHERE email = 'entrehubservices@gmail.com' AND name = 'Gabriel Adinga';

@@ -11,7 +11,7 @@ interface ContactModalProps {
   onClose: () => void;
 }
 
-const whatsappNumber = '+2348123456789'; // Random Nigerian WhatsApp number
+const whatsappNumber = '+2348129721560';
 const whatsappMessage = "Hello ENTREHUB! I'm interested in your digital marketing services. Can we discuss my project?";
 const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -83,8 +83,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <MapPin className="h-5 w-5" />
                 </span>
                 <span>
-                  <span className="block text-sm font-medium text-slate-600">Location</span>
-                  <span className="block font-semibold text-slate-900">Kaduna, Nigeria</span>
+                  <span className="block text-sm font-medium text-slate-600">Working together</span>
+                  <span className="block font-semibold text-slate-900">Remote collaboration worldwide</span>
                 </span>
               </li>
             </ul>

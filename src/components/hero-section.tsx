@@ -71,8 +71,8 @@ export default function HeroSection() {
         </h1>
 
         <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-200 sm:text-xl">
-          ENTREHUB transforms businesses through strategic digital marketing, innovative design
-          and data-driven solutions that deliver real results.
+          We build websites, apps and digital marketing campaigns for personal brands and businesses,
+          collaborating remotely across markets and time zones.
         </p>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">

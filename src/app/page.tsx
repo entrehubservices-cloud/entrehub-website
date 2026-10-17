@@ -11,19 +11,17 @@ import Footer from '@/components/footer';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
-  openGraph: { type: 'website', url: '/', title: 'Web Development & Digital Marketing in Nigeria | Entrehub Services', description: 'Web and app development, SEO, social media and email marketing from Kaduna, Nigeria, for clients worldwide.' },
+  openGraph: { type: 'website', url: '/', title: 'Web Development & Digital Marketing | Entrehub Services', description: 'Web and app development, SEO, social media and email marketing for personal brands and businesses worldwide.' },
 };
 
 export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd({
-        '@context': 'https://schema.org', '@type': 'ProfessionalService',
+        '@context': 'https://schema.org', '@type': 'Organization',
         '@id': siteUrl + '/#business', name: 'Entrehub Services', url: siteUrl,
         telephone: '+2348129721560', image: siteUrl + '/images/logo.jpeg',
-        address: { '@type': 'PostalAddress', streetAddress: 'M4, Tonjonss Plaza, Station Roundabout', addressLocality: 'Kaduna', addressRegion: 'Kaduna', addressCountry: 'NG' },
-        geo: { '@type': 'GeoCoordinates', latitude: 10.488648, longitude: 7.418596 },
-        openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '17:00' }],
+        foundingLocation: { '@type': 'Country', name: 'Nigeria' },
       }) }} />
       <Navigation />
       <main id="main-content" tabIndex={-1} className="min-h-screen focus:outline-none">

@@ -11,9 +11,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.entrehubng.com'),
-  title: { default: 'Web Development & Digital Marketing in Nigeria | Entrehub Services', template: '%s | Entrehub Services' },
-  description: 'Entrehub Services helps brands with web and app development, SEO, social media and email marketing. Based in Kaduna, Nigeria, serving clients worldwide.',
-  openGraph: { type: 'website', siteName: 'Entrehub Services', locale: 'en_NG', title: 'Entrehub Services', description: 'Web development and digital marketing from Kaduna, Nigeria, for brands worldwide.' },
+  title: { default: 'Web Development & Digital Marketing | Entrehub Services', template: '%s | Entrehub Services' },
+  description: 'Websites, apps, SEO, social media and email marketing for personal brands and growing businesses. Work with Entrehub Services wherever your business is based.',
+  openGraph: { type: 'website', siteName: 'Entrehub Services', title: 'Entrehub Services', description: 'Web development and digital marketing for brands worldwide.' },
   twitter: { card: 'summary', title: 'Entrehub Services', description: 'Web development and digital marketing for growing brands.' },
 };
 
