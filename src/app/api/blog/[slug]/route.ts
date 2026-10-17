@@ -11,7 +11,7 @@ export async function GET(
 ) {
     try {
         const { slug } = await params;
-        const result = await getBlogPostServer(slug);
+        const result = await getBlogPostServer(slug === 'the-future-of-digital-marketing-in-2024' ? 'digital-marketing-plan-service-businesses' : slug);
 
         if (!result.post) {
             return NextResponse.json(
@@ -82,6 +82,7 @@ export async function PUT(
         const post = await prisma.blogPost.update({
             where: { slug },
             data: {
+                ...((validatedData.title || validatedData.excerpt || validatedData.content || validatedData.coverImage) && { editorialUpdatedAt: new Date() }),
                 ...(validatedData.title && { title: validatedData.title }),
                 ...(validatedData.slug && { slug: validatedData.slug }),
                 ...(validatedData.excerpt && { excerpt: validatedData.excerpt }),

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         title: post.title,
         alternates: { canonical: `/blog/${encodeURIComponent(post.slug)}` },
         description: post.excerpt,
-        openGraph: { type: 'article', url: `/blog/${encodeURIComponent(post.slug)}`, title: post.title, description: post.excerpt, images: [post.coverImage], ...(post.publishedAt ? { publishedTime: post.publishedAt } : {}), tags: post.tags.map(tag => tag.name) },
+        openGraph: { type: 'article', url: `/blog/${encodeURIComponent(post.slug)}`, title: post.title, description: post.excerpt, images: [post.coverImage], ...(post.publishedAt ? { publishedTime: post.publishedAt } : {}), ...(post.editorialUpdatedAt ? { modifiedTime: post.editorialUpdatedAt } : {}), tags: post.tags.map(tag => tag.name) },
         twitter: { card: 'summary_large_image', title: post.title, description: post.excerpt, images: [post.coverImage] },
     };
 }
@@ -58,6 +58,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   { '@type': 'BlogPosting', '@id': `${siteUrl}/blog/${encodeURIComponent(post.slug)}#article`, headline: post.title, description: post.excerpt,
                     image: [new URL(post.coverImage, siteUrl).href], mainEntityOfPage: `${siteUrl}/blog/${encodeURIComponent(post.slug)}`,
                     ...(post.publishedAt ? { datePublished: post.publishedAt } : {}),
+                    ...(post.editorialUpdatedAt ? { dateModified: post.editorialUpdatedAt } : {}),
                     author: { '@type': 'Person', name: post.author.name },
                     publisher: { '@type': 'Organization', '@id': siteUrl + '/#business', name: 'Entrehub Services', url: siteUrl, logo: { '@type': 'ImageObject', url: siteUrl + '/images/logo.jpeg' } },
                     articleSection: post.category.name, keywords: post.tags.map(tag => tag.name).join(', '), inLanguage: 'en' },
@@ -108,7 +109,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                                 <span className="flex items-center gap-1.5">
                                     <Calendar className="h-4 w-4" aria-hidden="true" />
                                     {post.publishedAt ? (
-                                        <time dateTime={post.publishedAt}>{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</time>
+                                        <time dateTime={post.publishedAt}>{post.editorialUpdatedAt ? 'Rewritten ' : ''}{format(new Date(post.publishedAt), 'MMMM d, yyyy')}</time>
                                     ) : (
                                         'Draft'
                                     )}
@@ -125,7 +126,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-slate-100">
                             <Image
                                 src={post.coverImage}
-                                alt=""
+                                alt={post.coverImageAlt || ''}
                                 fill
                                 priority
                                 sizes="(min-width: 1024px) 1024px, 100vw"

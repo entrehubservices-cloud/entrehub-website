@@ -20,6 +20,8 @@ model BlogPost {
   featured    Boolean  @default(false)
   published   Boolean  @default(false)
   publishedAt DateTime?
+  editorialUpdatedAt DateTime?
+  coverImageAlt String?
   readTime    String
   views       Int      @default(0)
   

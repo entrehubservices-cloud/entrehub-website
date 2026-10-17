@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [{ source: '/blog/the-future-of-digital-marketing-in-2024', destination: '/blog/digital-marketing-plan-service-businesses', permanent: true }];
+  },
   async headers() {
     return [{ source: '/admin/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] }];
   },

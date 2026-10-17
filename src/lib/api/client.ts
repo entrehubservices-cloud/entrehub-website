@@ -12,6 +12,8 @@ export interface BlogPost {
     featured: boolean;
     published: boolean;
     publishedAt: string | null;
+    editorialUpdatedAt?: string | null;
+    coverImageAlt?: string | null;
     readTime: string;
     views: number;
     author: {
