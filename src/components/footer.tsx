@@ -49,8 +49,13 @@ export default function Footer() {
               Innovative digital marketing strategies that blend creativity and data-driven insights to elevate
               your brand&apos;s online presence and drive measurable growth.
             </p>
-          </div>
 
+          <address className="mt-5 not-italic text-sm leading-relaxed text-slate-300">
+              M4, Tonjonss Plaza, Station Roundabout, Kaduna, Nigeria<br />
+              <a href="tel:+2348129721560" className={linkClass}>+234 812 972 1560</a><br />
+              Monday–Friday, 9am–5pm (WAT)
+            </address>
+          </div>
           <nav aria-labelledby="footer-menu">
             <h3 id="footer-menu" className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">
               Menu

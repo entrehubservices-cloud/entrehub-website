@@ -1,3 +1,4 @@
+import { jsonLd, siteUrl } from '@/lib/seo';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,8 +13,10 @@ import BlogPageClient from './BlogPageClient';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Blog | ENTREHUB',
-  description: 'Insights, tips, and strategies to help your business grow in the digital age.',
+  title: 'Websites, SEO & Digital Marketing Insights',
+  description: 'Explore website, SEO, social media and email marketing insights from Entrehub Services for personal brands and growing businesses.',
+  alternates: { canonical: '/blog' },
+  openGraph: { type: 'website', url: '/blog', title: 'Websites, SEO & Digital Marketing Insights', description: 'Website and digital marketing insights from Entrehub Services.' },
 };
 
 export default async function BlogPage() {
@@ -28,11 +31,18 @@ export default async function BlogPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd({
+        '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl + '/' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: siteUrl + '/blog' },
+        ],
+      }) }} />
       <Navigation />
 
       <main id="main-content" tabIndex={-1} className="min-h-screen bg-slate-50 pt-20 focus:outline-none">
         <header className="border-b border-slate-200 bg-white">
           <div className="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-20">
+            <nav aria-label="Breadcrumb" className="mb-5 text-sm"><Link href="/" className="underline">Home</Link> / Blog</nav>
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.16em] text-navy">ENTREHUB Blog</p>
             <h1 className="mb-5 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
               Insights for growing <span className="text-navy">brands</span>

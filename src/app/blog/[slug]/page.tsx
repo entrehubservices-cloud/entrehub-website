@@ -1,3 +1,4 @@
+import { jsonLd, siteUrl } from '@/lib/seo';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,11 +24,13 @@ interface BlogPostPageProps {
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
     const { slug } = await params;
     const { post } = await getBlogPostServer(slug);
-    if (!post) return { title: 'Article not found | ENTREHUB' };
+    if (!post) return { title: 'Article not found', robots: { index: false, follow: false } };
     return {
-        title: `${post.title} | ENTREHUB Blog`,
+        title: post.title,
+        alternates: { canonical: `/blog/${encodeURIComponent(post.slug)}` },
         description: post.excerpt,
-        openGraph: { title: post.title, description: post.excerpt, images: [post.coverImage] },
+        openGraph: { type: 'article', url: `/blog/${encodeURIComponent(post.slug)}`, title: post.title, description: post.excerpt, images: [post.coverImage], ...(post.publishedAt ? { publishedTime: post.publishedAt } : {}), tags: post.tags.map(tag => tag.name) },
+        twitter: { card: 'summary_large_image', title: post.title, description: post.excerpt, images: [post.coverImage] },
     };
 }
 
@@ -50,12 +53,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
     return (
         <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd({
+                '@context': 'https://schema.org', '@graph': [
+                  { '@type': 'BlogPosting', '@id': `${siteUrl}/blog/${encodeURIComponent(post.slug)}#article`, headline: post.title, description: post.excerpt,
+                    image: [new URL(post.coverImage, siteUrl).href], mainEntityOfPage: `${siteUrl}/blog/${encodeURIComponent(post.slug)}`,
+                    ...(post.publishedAt ? { datePublished: post.publishedAt } : {}),
+                    author: { '@type': 'Person', name: post.author.name },
+                    publisher: { '@type': 'Organization', '@id': siteUrl + '/#business', name: 'Entrehub Services', url: siteUrl, logo: { '@type': 'ImageObject', url: siteUrl + '/images/logo.jpeg' } },
+                    articleSection: post.category.name, keywords: post.tags.map(tag => tag.name).join(', '), inLanguage: 'en' },
+                  { '@type': 'BreadcrumbList', itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl + '/' },
+                    { '@type': 'ListItem', position: 2, name: 'Blog', item: siteUrl + '/blog' },
+                    { '@type': 'ListItem', position: 3, name: post.title, item: `${siteUrl}/blog/${encodeURIComponent(post.slug)}` },
+                  ] },
+                ],
+            }) }} />
             <Navigation />
 
             <main id="main-content" tabIndex={-1} className="min-h-screen bg-white pt-20 focus:outline-none">
                 <article>
                     <header className="mx-auto max-w-3xl px-4 pt-10 sm:px-6 lg:pt-14">
                         <nav aria-label="Breadcrumb" className="mb-8">
+                            <Link href="/" className="mr-4 text-sm text-slate-600 underline">Home</Link>
                             <Link
                                 href="/blog"
                                 className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-slate-600 transition-colors hover:text-navy"
@@ -121,6 +140,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             dangerouslySetInnerHTML={{ __html: post.content }}
                         />
 
+                        <aside className="mt-10 rounded-xl bg-slate-50 p-6" aria-label="Work with Entrehub">
+                            <h2 className="text-xl font-bold">Put these ideas to work</h2>
+                            <p className="mt-3">Explore <Link href="/#services" className="text-navy underline">our website and digital marketing services</Link>, learn <Link href="/#about" className="text-navy underline">about Entrehub</Link>, or see <Link href="/#work" className="text-navy underline">our work</Link>.</p>
+                        </aside>
                         {post.tags.length > 0 && (
                             <ul aria-label="Tags" className="mt-12 flex flex-wrap gap-2">
                                 {post.tags.map((tag) => (

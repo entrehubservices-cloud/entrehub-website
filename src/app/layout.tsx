@@ -10,8 +10,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Entrehub ",
-  description: "Comprehensive digital marketing solutions designed to elevate your brand, engage your audience, and drive sustainable business growth.",
+  metadataBase: new URL('https://www.entrehubng.com'),
+  title: { default: 'Web Development & Digital Marketing in Nigeria | Entrehub Services', template: '%s | Entrehub Services' },
+  description: 'Entrehub Services helps brands with web and app development, SEO, social media and email marketing. Based in Kaduna, Nigeria, serving clients worldwide.',
+  openGraph: { type: 'website', siteName: 'Entrehub Services', locale: 'en_NG', title: 'Entrehub Services', description: 'Web development and digital marketing from Kaduna, Nigeria, for brands worldwide.' },
+  twitter: { card: 'summary', title: 'Entrehub Services', description: 'Web development and digital marketing for growing brands.' },
 };
 
 export default function RootLayout({

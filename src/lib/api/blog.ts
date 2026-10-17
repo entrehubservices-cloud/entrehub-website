@@ -97,7 +97,7 @@ export async function getBlogPostsServer(params: BlogPostParams = {}): Promise<P
  */
 export async function getBlogPostServer(slug: string): Promise<{ post: BlogPost | null }> {
     const post = await prisma.blogPost.findUnique({
-        where: { slug },
+        where: { slug, published: true },
         include: {
             author: {
                 select: {
@@ -124,13 +124,6 @@ export async function getBlogPostServer(slug: string): Promise<{ post: BlogPost 
         },
     });
 
-    if (post) {
-        // Increment view count asynchronously
-        prisma.blogPost.update({
-            where: { slug },
-            data: { views: { increment: 1 } },
-        }).catch(err => console.error('Error updating views:', err));
-    }
 
     return {
         post: post ? JSON.parse(JSON.stringify(post)) : null
