@@ -7,7 +7,7 @@ import ContactModal from './contact-modal';
 export default function CTASection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <section aria-labelledby="cta-heading" className="bg-white py-20 lg:py-28">
+    <section id="contact" aria-labelledby="cta-heading" className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="on-dark relative overflow-hidden rounded-3xl bg-navy-deep px-6 py-14 text-center shadow-xl sm:px-12 sm:py-20">
           <div className="relative">

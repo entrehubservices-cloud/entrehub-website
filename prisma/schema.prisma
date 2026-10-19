@@ -148,6 +148,9 @@ model Service {
 
 // Portfolio Project Model
 model PortfolioProject {
+  published Boolean @default(false)
+  status String @default("DRAFT")
+  projectUrl String?
   id          String   @id @default(cuid())
   title       String
   category    String

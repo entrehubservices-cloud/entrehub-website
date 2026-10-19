@@ -8,6 +8,7 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog';
 import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Project {
     id?: string;
@@ -18,6 +19,9 @@ interface Project {
     metric: string;
     metricLabel: string;
     order: number;
+    published: boolean;
+    status: string;
+    projectUrl: string | null;
 }
 
 interface Category {
@@ -46,6 +50,9 @@ export default function PortfolioDialog({
         metric: '',
         metricLabel: '',
         order: 0,
+        status: 'DRAFT',
+        published: false,
+        projectUrl: '',
     });
     const [categories, setCategories] = useState<Category[]>([]);
     const [isSaving, setIsSaving] = useState(false);
@@ -63,6 +70,9 @@ export default function PortfolioDialog({
                 metric: '',
                 metricLabel: '',
                 order: 0,
+        status: 'DRAFT',
+        published: false,
+        projectUrl: '',
             });
         }
     }, [project]);
@@ -111,6 +121,9 @@ export default function PortfolioDialog({
             if (res.ok) {
                 onSave();
                 onClose();
+            } else {
+                const data = await res.json();
+                toast.error(data.error || 'Failed to save project');
             }
         } catch (error) {
             console.error('Error saving project:', error);
@@ -121,7 +134,7 @@ export default function PortfolioDialog({
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[500px]">
+            <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle>{project ? 'Edit Project' : 'Add New Project'}</DialogTitle>
                 </DialogHeader>
@@ -184,7 +197,7 @@ export default function PortfolioDialog({
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Metric (e.g. +50%)
+                                Verified result (optional)
                             </label>
                             <input
                                 type="text"
@@ -231,6 +244,23 @@ export default function PortfolioDialog({
                         />
                     </div>
 
+                    <div>
+                        <label htmlFor="project-url" className="block text-sm font-medium mb-1">Project website</label>
+                        <input id="project-url" type="url" value={formData.projectUrl || ''} onChange={e => setFormData({ ...formData, projectUrl: e.target.value })} className="w-full border rounded-lg px-4 py-2" placeholder="https://" />
+                    </div>
+                    <div>
+                        <label htmlFor="project-status" className="block text-sm font-medium mb-1">Project status</label>
+                        <select id="project-status" value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value, published: e.target.value === 'COMPLETED' && formData.published })} className="w-full border rounded-lg px-4 py-2">
+                            <option value="DRAFT">Draft</option>
+                            <option value="IN_PROGRESS">In progress</option>
+                            <option value="COMPLETED">Completed</option>
+                        </select>
+                    </div>
+                    <label className="flex items-center gap-2 text-sm">
+                        <input type="checkbox" checked={formData.published} disabled={formData.status !== 'COMPLETED'} onChange={e => setFormData({ ...formData, published: e.target.checked })} />
+                        Publish completed project on the website
+                    </label>
+                    <p className="text-xs text-gray-500">Publish only Entrehub work approved for public display. Add results only when supported by evidence.</p>
                     <div className="flex justify-end gap-3 pt-6">
                         <button
                             type="button"

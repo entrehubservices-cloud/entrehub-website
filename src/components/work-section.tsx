@@ -12,6 +12,7 @@ interface Project {
   metric: string;
   metricLabel: string;
   image: string;
+  projectUrl?: string | null;
 }
 
 export default function WorkSection() {
@@ -37,7 +38,15 @@ export default function WorkSection() {
   }, []);
 
   if (!isLoading && projects.length === 0) {
-    return null;
+    return (
+      <section id="work" aria-labelledby="work-heading" className="bg-slate-50 py-20">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <h2 id="work-heading" className="text-3xl font-bold text-slate-900">Selected work</h2>
+          <p className="mt-4 text-lg text-slate-600">We’re preparing a closer look at our completed client projects. In the meantime, tell us what you’re working on.</p>
+          <a href="#contact" className="mt-6 inline-flex rounded-xl bg-navy px-6 py-3 font-semibold text-white">Discuss your project</a>
+        </div>
+      </section>
+    );
   }
 
   return (
@@ -45,9 +54,9 @@ export default function WorkSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           id="work-heading"
-          eyebrow="Success stories"
+          eyebrow="Selected work"
           title={<>Our <span className="text-navy">portfolio</span></>}
-          description="Discover how we've transformed businesses through strategic digital marketing, delivering measurable results and sustainable growth."
+          description="A selection of websites, campaigns and creative work delivered by Entrehub Services."
         />
 
         {isLoading ? (
@@ -73,10 +82,11 @@ export default function WorkSection() {
                     </h3>
                     <p className="mb-8 text-lg leading-relaxed text-slate-600">{project.description}</p>
 
-                    <dl className="inline-flex flex-col-reverse border-l-4 border-navy pl-4">
+                    {project.metric && project.metricLabel ? <dl className="inline-flex flex-col-reverse border-l-4 border-navy pl-4">
                       <dt className="text-sm font-medium uppercase tracking-wide text-slate-600">{project.metricLabel}</dt>
                       <dd className="text-3xl font-bold text-slate-900">{project.metric}</dd>
-                    </dl>
+                    </dl> : null}
+                    {project.projectUrl ? <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="mt-6 block font-semibold text-navy underline">Visit project website<span className="sr-only"> (opens in a new tab)</span></a> : null}
                   </div>
 
                   <div className={`relative aspect-[4/3] overflow-hidden rounded-3xl bg-slate-200 shadow-xl ${index % 2 === 1 ? 'lg:order-1' : ''}`}>

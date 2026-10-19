@@ -15,6 +15,9 @@ interface Project {
     metric: string;
     metricLabel: string;
     order: number;
+    published: boolean;
+    status: string;
+    projectUrl: string | null;
 }
 
 export default function PortfolioAdminPage() {
@@ -40,7 +43,7 @@ export default function PortfolioAdminPage() {
 
     const fetchProjects = async () => {
         try {
-            const res = await fetch('/api/portfolio');
+            const res = await fetch('/api/portfolio?admin=true');
             if (res.ok) {
                 const data = await res.json();
                 setProjects(data);
@@ -128,7 +131,7 @@ export default function PortfolioAdminPage() {
                             </div>
                             <div>
                                 <h3 className="font-bold text-gray-900">{project.title}</h3>
-                                <p className="text-sm text-gray-500 line-clamp-1">{project.category}</p>
+                                <p className="text-sm text-gray-500 line-clamp-1">{project.category} · {project.status.replaceAll('_', ' ')} · {project.published ? 'Published' : 'Unpublished'}</p>
                             </div>
                         </div>
 

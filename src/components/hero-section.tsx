@@ -4,12 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ChevronDown, Pause, Play } from 'lucide-react';
 import ContactModal from './contact-modal';
 
-const stats = [
-  { value: '50+', label: 'Projects delivered' },
-  { value: '98%', label: 'Client success rate' },
-  { value: '24/7', label: 'Support' },
-];
-
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -93,16 +87,7 @@ export default function HeroSection() {
           </a>
         </div>
 
-        <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-4 border-t border-white/15 pt-8 sm:gap-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col-reverse">
-              <dt className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-300 sm:text-sm">
-                {stat.label}
-              </dt>
-              <dd className="text-2xl font-bold text-white sm:text-3xl">{stat.value}</dd>
-            </div>
-          ))}
-        </dl>
+
       </div>
 
       {/* Video pause control (WCAG 2.2.2) */}
