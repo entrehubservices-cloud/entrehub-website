@@ -111,7 +111,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </button>
 
               <p className="pt-1 text-center text-sm text-slate-600">
-                We typically respond within 30 minutes during business hours.
+                We respond during business hours: Monday–Friday, 9am–5pm (WAT).
               </p>
             </div>
           </Dialog.Content>

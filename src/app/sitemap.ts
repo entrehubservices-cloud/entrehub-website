@@ -13,6 +13,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: origin + '/' },
     { url: origin + '/blog' },
+    { url: origin + '/privacy' },
+    { url: origin + '/terms' },
     ...posts.map(post => ({
       url: origin + '/blog/' + encodeURIComponent(post.slug),
       lastModified: post.updatedAt,

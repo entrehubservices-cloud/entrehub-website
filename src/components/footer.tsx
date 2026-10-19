@@ -17,12 +17,11 @@ const services = [
   'Creative & Content',
 ];
 
-// TODO: replace '#' with the real profile URLs
 const socialMedia = [
-  { name: 'Instagram', href: '#' },
-  { name: 'Twitter', href: '#' },
-  { name: 'LinkedIn', href: '#' },
-  { name: 'Facebook', href: '#' },
+  { name: 'Instagram', href: 'https://www.instagram.com/entre_hubservices/' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/entrehub-services/' },
+  { name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61555757332109' },
+  { name: 'TikTok', href: 'https://www.tiktok.com/@entrehubservices1' },
 ];
 
 const linkClass =
@@ -107,14 +106,14 @@ export default function Footer() {
           <p className="text-sm text-slate-400">© {new Date().getFullYear()} ENTREHUB. All rights reserved.</p>
           <ul className="flex gap-6 text-sm">
             <li>
-              <a href="#" className={linkClass}>
-                Terms &amp; Conditions
-              </a>
+              <Link href="/terms" className={linkClass}>
+                Website terms
+              </Link>
             </li>
             <li>
-              <a href="#" className={linkClass}>
-                Privacy Policy
-              </a>
+              <Link href="/privacy" className={linkClass}>
+                Privacy policy
+              </Link>
             </li>
           </ul>
         </div>

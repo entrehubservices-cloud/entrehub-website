@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import EnquiryTracking from "@/components/enquiry-tracking";
 import "./globals.css";
 
 const inter = Inter({
@@ -69,6 +70,7 @@ export default function RootLayout({
         </noscript>
         {/* End Meta Pixel Code */}
 
+        <EnquiryTracking />
         {children}
       </body>
     </html>

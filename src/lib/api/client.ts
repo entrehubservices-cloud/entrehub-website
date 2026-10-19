@@ -1,4 +1,5 @@
 // API client utilities for frontend
+import { trackConfirmedEnquiry } from '@/lib/analytics';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_APP_URL || '';
 
@@ -147,5 +148,7 @@ export async function submitContactForm(data: {
         throw new Error(error.error || 'Failed to submit message');
     }
 
-    return res.json();
+    const result = await res.json();
+    trackConfirmedEnquiry();
+    return result;
 }
