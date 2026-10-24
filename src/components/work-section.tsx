@@ -51,8 +51,8 @@ export default function WorkSection() {
         <SectionHeader
           id="work-heading"
           eyebrow="Selected work"
-          title={<>A few things we&apos;ve <span className="text-navy">made.</span></>}
-          description="Websites and digital experiences delivered for real client projects."
+          title={<>Our <span className="text-navy">portfolio</span></>}
+          description="A selection of websites, campaigns and creative work delivered by Entrehub Services."
         />
 
         {isLoading ? (
