@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Pause, Play, Sparkles } from 'lucide-react';
-import { Montserrat } from 'next/font/google';
+import { League_Spartan } from 'next/font/google';
 import ContactModal from './contact-modal';
 
-const heroFont = Montserrat({ subsets: ['latin'], weight: ['700', '800'], display: 'swap' });
+const heroFont = League_Spartan({ subsets: ['latin'], weight: ['800'], display: 'swap' });
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -46,9 +46,11 @@ export default function HeroSection() {
 
           <h1
             id="hero-heading"
-            className={`${heroFont.className} mb-5 max-w-none text-[2.75rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-slate-950 sm:text-6xl lg:text-[3.75rem] xl:text-[4rem] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-700`}
+            className={`${heroFont.className} mb-5 max-w-none text-[2.75rem] font-extrabold leading-[0.98] tracking-[-0.04em] text-slate-950 sm:text-[4.25rem] lg:text-[3.65rem] xl:text-[4.1rem]`}
           >
-            Grow your brand with <span className="text-orange-600">measurable</span> digital marketing
+            <span className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 [animation-fill-mode:both]" style={{ animationDelay: '60ms' }}>Grow your brand</span>
+            <span className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 [animation-fill-mode:both]" style={{ animationDelay: '180ms' }}>with <span className="text-orange-600">measurable</span></span>
+            <span className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 [animation-fill-mode:both]" style={{ animationDelay: '300ms' }}>digital marketing</span>
           </h1>
 
           <p className="mb-7 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
