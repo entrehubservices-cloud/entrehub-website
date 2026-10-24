@@ -75,7 +75,6 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mt-3 text-sm leading-6 text-slate-400">Connect with us for updates, ideas and new work.</p>
           </nav>
         </div>
 
