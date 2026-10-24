@@ -45,11 +45,11 @@ export default function HeroSection() {
             id="hero-heading"
             className="mb-5 max-w-[12ch] text-[2.75rem] font-bold leading-[1.02] tracking-[-0.045em] text-slate-950 sm:text-6xl lg:text-[4.25rem]"
           >
-            Build a digital presence that <span className="text-navy">moves you forward.</span>
+            Grow your brand with <span className="text-orange-600">measurable</span> digital marketing
           </h1>
 
           <p className="mb-7 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
-            Entrehub builds websites, apps and digital marketing systems for businesses ready to grow. We work remotely with clients across markets and time zones.
+            We build websites, apps and digital marketing campaigns for personal brands and businesses, collaborating remotely across markets and time zones.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -59,14 +59,14 @@ export default function HeroSection() {
               aria-haspopup="dialog"
               className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-navy px-6 text-sm font-semibold text-white shadow-md shadow-blue-950/15 transition hover:bg-navy-hover"
             >
-              Tell us what you’re building
+              Get in touch
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </button>
             <a
               href="#work"
               className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300 bg-white px-6 text-sm font-semibold text-slate-800 transition hover:border-navy hover:text-navy"
             >
-              Explore selected work
+              View our work
             </a>
           </div>
 
