@@ -48,13 +48,13 @@ export default function HeroSection() {
             id="hero-heading"
             className={`${heroFont.className} mb-5 max-w-none text-[2.75rem] font-extrabold leading-[0.98] tracking-[-0.04em] text-slate-950 sm:text-[4.25rem] lg:text-[3.65rem] xl:text-[4.1rem]`}
           >
-            <span className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 [animation-fill-mode:both]" style={{ animationDelay: '60ms' }}>Grow your brand</span>
-            <span className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 [animation-fill-mode:both]" style={{ animationDelay: '180ms' }}>with <span className="text-orange-600">measurable</span></span>
-            <span className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 [animation-fill-mode:both]" style={{ animationDelay: '300ms' }}>digital marketing</span>
+            <span className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 [animation-fill-mode:both]" style={{ animationDelay: '60ms' }}>One partner for</span>
+            <span className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 [animation-fill-mode:both]" style={{ animationDelay: '180ms' }}>your complete</span>
+            <span className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 [animation-fill-mode:both]" style={{ animationDelay: '300ms' }}>digital presence.</span>
           </h1>
 
           <p className="mb-7 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
-            We build websites, apps and digital marketing campaigns for personal brands and businesses, collaborating remotely across markets and time zones.
+            From brand design and content to websites, apps, SEO and digital marketing, we bring the pieces together to strengthen your online presence.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
