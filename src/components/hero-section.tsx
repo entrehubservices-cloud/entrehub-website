@@ -2,7 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Pause, Play, Sparkles } from 'lucide-react';
+import { Montserrat } from 'next/font/google';
 import ContactModal from './contact-modal';
+
+const heroFont = Montserrat({ subsets: ['latin'], weight: ['700', '800'], display: 'swap' });
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -43,7 +46,7 @@ export default function HeroSection() {
 
           <h1
             id="hero-heading"
-            className="mb-5 max-w-[12ch] text-[2.75rem] font-bold leading-[1.02] tracking-[-0.045em] text-slate-950 sm:text-6xl lg:text-[4.25rem]"
+            className={`${heroFont.className} mb-5 max-w-none text-[2.75rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-slate-950 sm:text-6xl lg:text-[4.25rem] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-700`}
           >
             Grow your brand with <span className="text-orange-600">measurable</span> digital marketing
           </h1>
