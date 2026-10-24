@@ -11,7 +11,6 @@ const navItems = [
   { name: 'About', href: '/#about' },
   { name: 'Services', href: '/#services' },
   { name: 'Work', href: '/#work' },
-  // { name: 'Team', href: '/#team' },
   { name: 'Blog', href: '/blog' },
 ];
 
@@ -28,7 +27,6 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close the mobile menu with Escape and return focus to the toggle
   useEffect(() => {
     if (!isMenuOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -43,40 +41,28 @@ export default function Navigation() {
 
   return (
     <>
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
 
       <header
-        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b transition-shadow duration-300 ${
+        className={`fixed inset-x-0 top-0 z-50 border-b bg-white/95 backdrop-blur-md transition-shadow duration-300 ${
           isScrolled ? 'border-slate-200 shadow-sm' : 'border-transparent'
         }`}
       >
-        <nav aria-label="Main" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            <Link href="/#home" className="flex items-center gap-3 rounded-lg" aria-label="ENTREHUB home">
-              <span className="w-11 h-11 rounded-xl overflow-hidden ring-1 ring-slate-200">
-                <Image
-                  src="/images/logo.jpeg"
-                  alt=""
-                  width={44}
-                  height={44}
-                  className="object-cover w-full h-full"
-                  priority
-                />
+        <nav aria-label="Main" className="mx-auto max-w-7xl px-4 sm:px-7 lg:px-10">
+          <div className="flex h-[4.25rem] items-center justify-between">
+            <Link href="/#home" className="flex items-center gap-2.5 rounded-lg" aria-label="ENTREHUB home">
+              <span className="h-9 w-9 overflow-hidden rounded-lg ring-1 ring-slate-200">
+                <Image src="/images/logo.jpeg" alt="" width={36} height={36} className="h-full w-full object-cover" priority />
               </span>
-              <span className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+              <span className="text-lg font-bold tracking-tight text-slate-900 sm:text-xl">
                 ENTRE<span className="text-orange-600">HUB</span>
               </span>
             </Link>
 
-            <ul className="hidden md:flex items-center gap-1">
+            <ul className="hidden items-center gap-0.5 md:flex">
               {navItems.map((item) => (
                 <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="inline-flex items-center min-h-11 px-4 text-sm font-medium text-slate-700 rounded-lg hover:text-slate-900 hover:bg-slate-100 transition-colors"
-                  >
+                  <Link href={item.href} className="inline-flex min-h-10 items-center rounded-lg px-3 text-[13px] font-medium text-slate-700 transition hover:bg-slate-100 hover:text-navy">
                     {item.name}
                   </Link>
                 </li>
@@ -84,12 +70,7 @@ export default function Navigation() {
             </ul>
 
             <div className="hidden md:block">
-              <button
-                type="button"
-                onClick={() => setIsModalOpen(true)}
-                aria-haspopup="dialog"
-                className="inline-flex items-center min-h-11 px-6 rounded-xl bg-navy text-white text-sm font-semibold shadow-sm hover:bg-navy-hover transition-colors"
-              >
+              <button type="button" onClick={() => setIsModalOpen(true)} aria-haspopup="dialog" className="inline-flex min-h-10 items-center rounded-xl bg-navy px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-hover">
                 Let&apos;s Talk
               </button>
             </div>
@@ -101,37 +82,24 @@ export default function Navigation() {
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-700 transition hover:bg-slate-100 md:hidden"
             >
-              {isMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+              {isMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
             </button>
           </div>
 
           {isMenuOpen && (
-            <div id="mobile-menu" className="md:hidden border-t border-slate-200 pb-6 pt-4">
-              <ul className="space-y-1">
+            <div id="mobile-menu" className="border-t border-slate-200 pb-4 pt-3 md:hidden">
+              <ul className="space-y-0.5">
                 {navItems.map((item) => (
                   <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="flex items-center min-h-12 px-4 text-base font-medium text-slate-700 rounded-lg hover:text-slate-900 hover:bg-slate-100 transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
+                    <Link href={item.href} className="flex min-h-11 items-center rounded-lg px-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-navy" onClick={() => setIsMenuOpen(false)}>
                       {item.name}
                     </Link>
                   </li>
                 ))}
               </ul>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setIsModalOpen(true);
-                  setIsMenuOpen(false);
-                }}
-                aria-haspopup="dialog"
-                className="mt-4 w-full min-h-12 rounded-xl bg-navy text-white text-base font-semibold shadow-sm hover:bg-navy-hover transition-colors"
-              >
+              <button type="button" onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} aria-haspopup="dialog" className="mt-3 min-h-11 w-full rounded-xl bg-navy text-sm font-semibold text-white shadow-sm transition hover:bg-navy-hover">
                 Let&apos;s Talk
               </button>
             </div>
