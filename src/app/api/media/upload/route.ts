@@ -49,7 +49,6 @@ export async function POST(request: NextRequest) {
                 console.info('Entrehub media uploaded', {
                     pathname: blob.pathname,
                     contentType: blob.contentType,
-                    size: blob.size,
                 });
             },
         });
