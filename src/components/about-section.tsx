@@ -44,16 +44,16 @@ export default function AboutSection() {
           id="about-heading"
           eyebrow="About ENTREHUB"
           title={<>Our <span className="text-navy">story</span></>}
-          description="Digital work should make the next step in business clearer, simpler and more achievable."
+          description="Transforming businesses through innovative digital marketing strategies that deliver measurable results and sustainable growth."
         />
 
         <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="space-y-4">
             <p className="border-l-[3px] border-orange-500 pl-5 text-lg font-medium leading-7 text-slate-800 sm:text-xl">
-              At ENTREHUB, we create digital experiences that help businesses communicate clearly and reach the people they want to serve.
+              At ENTREHUB, we don&apos;t just create campaigns – we craft digital experiences that transform businesses and drive real, measurable results.
             </p>
             <p className="text-base leading-7 text-slate-600">
-              We work remotely with clients across markets, bringing strategy, creative thinking and technical delivery together in one practical partnership.
+              We bridge the gap between local businesses and global opportunities. Our mission is simple: to be your trusted partner in sustainable growth and digital excellence through data-driven strategies and creative innovation.
             </p>
           </div>
 
