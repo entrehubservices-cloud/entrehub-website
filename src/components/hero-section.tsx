@@ -37,7 +37,7 @@ export default function HeroSection() {
       aria-labelledby="hero-heading"
       className="relative overflow-hidden bg-white pt-[4.25rem]"
     >
-      <div className="mx-auto grid min-h-[min(760px,calc(100svh-4.25rem))] max-w-7xl items-center gap-9 px-5 py-12 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12 lg:px-10 lg:py-14">
+      <div className="mx-auto grid min-h-[min(760px,calc(100svh-4.25rem))] max-w-7xl items-center gap-9 px-5 py-12 sm:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:px-10 lg:py-14">
         <div className="relative z-10 max-w-2xl">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-navy">
             <span className="h-2 w-2 rounded-full bg-orange-500" aria-hidden="true" />
@@ -46,7 +46,7 @@ export default function HeroSection() {
 
           <h1
             id="hero-heading"
-            className={`${heroFont.className} mb-5 max-w-none text-[2.75rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-slate-950 sm:text-6xl lg:text-[4.25rem] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-700`}
+            className={`${heroFont.className} mb-5 max-w-none text-[2.75rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-slate-950 sm:text-6xl lg:text-[3.75rem] xl:text-[4rem] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-700`}
           >
             Grow your brand with <span className="text-orange-600">measurable</span> digital marketing
           </h1>
