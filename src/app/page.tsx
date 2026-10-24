@@ -5,7 +5,6 @@ import HeroSection from '@/components/hero-section';
 import AboutSection from '@/components/about-section';
 import ServicesSection from '@/components/services-section';
 import WorkSection from '@/components/work-section';
-import TeamSection from '@/components/team-section';
 import CTASection from '@/components/cta-section';
 import Footer from '@/components/footer';
 import Link from 'next/link';
@@ -30,15 +29,14 @@ export default function Home() {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
-        <section aria-labelledby="service-guides" className="bg-slate-50 py-14">
-          <div className="mx-auto max-w-6xl px-5">
-            <h2 id="service-guides" className="mb-4 text-3xl font-bold text-slate-900">Explore website development and SEO services</h2>
-            <p className="mb-7 text-lg text-slate-600">Read about the scope, completed work and questions to consider before starting a project.</p>
-            <ul className="grid gap-5 md:grid-cols-3">{servicePages.map(service => <li key={service.slug} className="rounded-xl border border-slate-200 bg-white p-6"><h3 className="mb-3 text-xl font-semibold"><Link href={`/services/${service.slug}`} className="text-navy underline">{service.title}</Link></h3><p className="leading-relaxed text-slate-600">{service.description}</p></li>)}</ul>
+        <section aria-labelledby="service-guides" className="bg-blue-50/60 py-11 lg:py-12">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+            <h2 id="service-guides" className="mb-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Explore website development and SEO services</h2>
+            <p className="mb-5 max-w-3xl text-base leading-6 text-slate-600">Read about the scope, completed work and questions to consider before starting a project.</p>
+            <ul className="grid gap-3 md:grid-cols-3">{servicePages.map(service => <li key={service.slug} className="rounded-xl border border-blue-100 bg-white p-4 shadow-sm"><h3 className="mb-2 text-base font-semibold"><Link href={`/services/${service.slug}`} className="text-navy underline underline-offset-4">{service.title}</Link></h3><p className="text-sm leading-6 text-slate-600">{service.description}</p></li>)}</ul>
           </div>
         </section>
         <WorkSection />
-        {/* <TeamSection /> */}
         <CTASection />
       </main>
       <Footer />
