@@ -17,6 +17,7 @@ import {
     Users,
     Video,
     ExternalLink,
+    FolderOpen,
 } from 'lucide-react';
 import NextImage from 'next/image';
 
@@ -109,6 +110,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     const navigation = [
         { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
         { name: 'Blog Posts', href: '/admin/blog', icon: FileText },
+        { name: 'Media Library', href: '/admin/media', icon: FolderOpen },
         { name: 'About Section', href: '/admin/about', icon: Info },
         { name: 'Services', href: '/admin/services', icon: Briefcase },
         { name: 'Portfolio', href: '/admin/portfolio', icon: Image },

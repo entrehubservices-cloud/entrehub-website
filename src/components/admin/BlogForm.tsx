@@ -9,6 +9,7 @@ import {
     getAdminAuthors
 } from '@/lib/api/admin';
 import RichTextEditor from '@/components/admin/RichTextEditor';
+import MediaUploader from '@/components/admin/MediaUploader';
 import { Category, Tag, Author, BlogPost } from '@/types/admin';
 
 interface BlogFormProps {
@@ -247,6 +248,11 @@ export default function BlogForm({ initialData, isEdit = false, onSubmit }: Blog
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy/30 text-sm"
                             placeholder="https://example.com/image.jpg"
+                        />
+                        <MediaUploader
+                            defaultCategory="blog"
+                            mode="image"
+                            onUploaded={(url) => setFormData((prev) => ({ ...prev, coverImage: url }))}
                         />
                         {formData.coverImage && (
                             <div className="mt-3 rounded-lg overflow-hidden border border-gray-200">
