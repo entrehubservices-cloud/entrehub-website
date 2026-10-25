@@ -255,3 +255,162 @@ p {
     @apply bg-background text-foreground;
   }
 }
+
+/* Entrehub public brand skin: midnight blue, logo blue and logo gold.
+   Activated by the shared public navigation so administrative pages remain unchanged. */
+:root {
+  --entrehub-brand-blue: #2f6daa;
+  --entrehub-brand-gold: #f2b91f;
+  --entrehub-midnight: #0a1730;
+  --entrehub-night-surface: #112548;
+  --entrehub-night-raised: #18365e;
+  --entrehub-night-text: #f7f9fd;
+  --entrehub-night-muted: #c1cee1;
+  --entrehub-night-subtle: #9fb2cf;
+  --entrehub-night-border: rgba(180, 204, 236, 0.18);
+}
+
+body:has(header.brand-skin) {
+  background-color: var(--entrehub-midnight) !important;
+  color: var(--entrehub-night-text);
+  color-scheme: dark;
+}
+
+header.brand-skin {
+  background-color: rgba(8, 21, 43, 0.96) !important;
+  border-color: var(--entrehub-night-border) !important;
+  color: var(--entrehub-night-text);
+}
+
+body:has(header.brand-skin) main#main-content {
+  background-color: var(--entrehub-midnight);
+  color: var(--entrehub-night-text);
+}
+
+footer.brand-skin {
+  background-color: var(--entrehub-midnight) !important;
+  color: var(--entrehub-night-text);
+}
+
+/* Re-map light utility surfaces to layered dark-blue surfaces on public pages. */
+body:has(header.brand-skin) [class~="bg-white"] {
+  background-color: var(--entrehub-night-surface) !important;
+}
+body:has(header.brand-skin) [class~="bg-white/95"] {
+  background-color: rgba(8, 21, 43, 0.96) !important;
+}
+body:has(header.brand-skin) [class~="bg-slate-50"],
+body:has(header.brand-skin) [class~="bg-slate-50/60"] {
+  background-color: #0e1e3a !important;
+}
+body:has(header.brand-skin) [class~="bg-slate-100"] {
+  background-color: #183153 !important;
+}
+body:has(header.brand-skin) [class~="bg-slate-200"],
+body:has(header.brand-skin) [class~="bg-slate-200/70"] {
+  background-color: #203b61 !important;
+}
+body:has(header.brand-skin) [class~="bg-blue-50"],
+body:has(header.brand-skin) [class~="bg-blue-50/60"] {
+  background-color: #132b4d !important;
+}
+body:has(header.brand-skin) [class~="bg-orange-50"] {
+  background-color: #332b18 !important;
+}
+body:has(header.brand-skin) [class~="bg-navy-tint"] {
+  background-color: #1a365d !important;
+}
+body:has(header.brand-skin) [class~="bg-navy"] {
+  background-color: var(--entrehub-brand-blue) !important;
+}
+body:has(header.brand-skin) [class~="bg-navy-hover"] {
+  background-color: #397db9 !important;
+}
+body:has(header.brand-skin) [class~="bg-navy-deep"] {
+  background-color: #08162e !important;
+}
+
+/* Text colours keep body copy readable while reserving gold for brand emphasis. */
+body:has(header.brand-skin) [class~="text-slate-950"],
+body:has(header.brand-skin) [class~="text-slate-900"],
+body:has(header.brand-skin) [class~="text-gray-900"] {
+  color: var(--entrehub-night-text) !important;
+}
+body:has(header.brand-skin) [class~="text-slate-800"],
+body:has(header.brand-skin) [class~="text-slate-700"],
+body:has(header.brand-skin) [class~="text-gray-700"] {
+  color: #dce6f5 !important;
+}
+body:has(header.brand-skin) [class~="text-slate-600"],
+body:has(header.brand-skin) [class~="text-slate-500"],
+body:has(header.brand-skin) [class~="text-slate-400"],
+body:has(header.brand-skin) [class~="text-gray-600"] {
+  color: var(--entrehub-night-muted) !important;
+}
+body:has(header.brand-skin) [class~="text-navy"],
+body:has(header.brand-skin) [class~="text-orange-400"],
+body:has(header.brand-skin) [class~="text-orange-500"],
+body:has(header.brand-skin) [class~="text-orange-600"],
+body:has(header.brand-skin) [class~="text-orange-700"],
+body:has(header.brand-skin) [class~="text-orange-800"] {
+  color: #f6c84b !important;
+}
+
+/* Refine separators, chips and focus states for the dark palette. */
+body:has(header.brand-skin) [class~="border-slate-100"],
+body:has(header.brand-skin) [class~="border-slate-200"],
+body:has(header.brand-skin) [class~="border-slate-300"],
+body:has(header.brand-skin) [class~="border-transparent"] {
+  border-color: var(--entrehub-night-border) !important;
+}
+body:has(header.brand-skin) [class~="border-blue-100"],
+body:has(header.brand-skin) [class~="border-blue-200"],
+body:has(header.brand-skin) [class~="border-navy/25"],
+body:has(header.brand-skin) [class~="border-navy/40"] {
+  border-color: rgba(103, 164, 221, 0.38) !important;
+}
+body:has(header.brand-skin) [class~="border-orange-200"],
+body:has(header.brand-skin) [class~="border-orange-300"],
+body:has(header.brand-skin) [class~="border-orange-400/20"] {
+  border-color: rgba(242, 185, 31, 0.35) !important;
+}
+body:has(header.brand-skin) [class~="ring-slate-200"],
+body:has(header.brand-skin) [class~="ring-orange-200"],
+body:has(header.brand-skin) [class~="ring-navy/30"] {
+  --tw-ring-color: rgba(242, 185, 31, 0.55) !important;
+}
+body:has(header.brand-skin) :focus-visible {
+  outline-color: #f6c84b;
+}
+body:has(header.brand-skin) input,
+body:has(header.brand-skin) textarea,
+body:has(header.brand-skin) select {
+  background-color: #0c1a34;
+  border-color: rgba(180, 204, 236, 0.3);
+  color: var(--entrehub-night-text);
+}
+body:has(header.brand-skin) input::placeholder,
+body:has(header.brand-skin) textarea::placeholder {
+  color: var(--entrehub-night-subtle);
+}
+body:has(header.brand-skin) .prose {
+  --tw-prose-body: #c1cee1;
+  --tw-prose-headings: #f7f9fd;
+  --tw-prose-lead: #dce6f5;
+  --tw-prose-links: #f6c84b;
+  --tw-prose-bold: #f7f9fd;
+  --tw-prose-counters: #b7c7dd;
+  --tw-prose-bullets: #9fb2cf;
+  --tw-prose-hr: rgba(180, 204, 236, 0.2);
+  --tw-prose-quotes: #f7f9fd;
+  --tw-prose-quote-borders: #f2b91f;
+  --tw-prose-captions: #a9bad2;
+  --tw-prose-code: #ffe08a;
+  --tw-prose-pre-code: #edf3fd;
+  --tw-prose-pre-bg: #08162e;
+  --tw-prose-th-borders: #385579;
+  --tw-prose-td-borders: #263f62;
+}
+body:has(header.brand-skin) .prose a {
+  color: #f6c84b !important;
+}

@@ -44,7 +44,7 @@ export default function Navigation() {
       <a href="#main-content" className="skip-link">Skip to main content</a>
 
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b bg-white/95 backdrop-blur-md transition-shadow duration-300 ${
+        className={`brand-skin fixed inset-x-0 top-0 z-50 border-b bg-white/95 backdrop-blur-md transition-shadow duration-300 ${
           isScrolled ? 'border-slate-200 shadow-sm' : 'border-transparent'
         }`}
       >
@@ -54,8 +54,8 @@ export default function Navigation() {
               <span className="h-9 w-9 overflow-hidden rounded-lg ring-1 ring-slate-200">
                 <Image src="/images/logo.jpeg" alt="" width={36} height={36} className="h-full w-full object-cover" priority />
               </span>
-              <span className="text-lg font-bold tracking-tight text-slate-900 sm:text-xl">
-                ENTRE<span className="text-orange-600">HUB</span>
+              <span className="text-lg font-bold tracking-tight text-blue-200 sm:text-xl">
+                ENTRE<span className="text-amber-300">HUB</span>
               </span>
             </Link>
 

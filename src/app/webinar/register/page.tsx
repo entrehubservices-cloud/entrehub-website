@@ -194,7 +194,7 @@ export default function WebinarRegistrationPage() {
             </div>
             
             <Button 
-              className="mt-8 w-full bg-gradient-to-r from-blue-600 to-orange-500 hover:opacity-90"
+              className="mt-8 w-full bg-gradient-to-r from-blue-600 to-amber-400 hover:opacity-90"
               onClick={() => window.location.href = "/"}
             >
               Back to Home

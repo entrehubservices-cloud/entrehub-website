@@ -29,7 +29,7 @@ const linkClass =
 
 export default function Footer() {
   return (
-    <footer className="on-dark bg-navy-deep text-white" aria-labelledby="footer-heading">
+    <footer className="brand-skin on-dark bg-navy-deep text-white" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">Footer</h2>
       <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -38,7 +38,7 @@ export default function Footer() {
               <span className="h-10 w-10 overflow-hidden rounded-xl ring-1 ring-white/20">
                 <Image src="/images/logo.jpeg" alt="" width={40} height={40} className="h-full w-full object-cover" />
               </span>
-              <span className="text-xl font-bold tracking-tight">ENTRE<span className="text-orange-400">HUB</span></span>
+              <span className="text-xl font-bold tracking-tight text-blue-200">ENTRE<span className="text-amber-300">HUB</span></span>
             </div>
             <p className="leading-relaxed text-slate-300">
               Innovative digital marketing strategies that blend creativity and data-driven insights to elevate your brand&apos;s online presence and drive measurable growth.
