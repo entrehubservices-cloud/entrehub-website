@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import PricingCatalog from "@/components/pricing-catalog";
