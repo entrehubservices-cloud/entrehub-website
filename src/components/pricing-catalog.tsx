@@ -55,7 +55,9 @@ export default function PricingCatalog() {
         setRates(nextRates);
         setRateDate(rateRows[0]?.date ?? null);
         const names = new Map(currencyRows.map((row) => [row.iso_code, row.name]));
+        const nonCurrencyAssets = new Set(["BCH", "BTC", "CMD", "ETH", "LTC", "XAG", "XAU", "XDR", "XPD", "XPT", "XRP"]);
         const options = Object.keys(nextRates)
+          .filter((code) => !nonCurrencyAssets.has(code))
           .map((code) => ({ iso_code: code, name: names.get(code) ?? code }))
           .sort((a, b) => a.iso_code === "USD" ? -1 : b.iso_code === "USD" ? 1 : a.iso_code.localeCompare(b.iso_code));
         setCurrencies(options);
