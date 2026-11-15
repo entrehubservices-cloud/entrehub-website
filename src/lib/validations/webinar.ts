@@ -49,12 +49,12 @@ export const hearAboutUsOptions = [
 ];
 
 export const interestTopics = [
-  "AI & Machine Learning",
-  "Digital Transformation",
-  "Cybersecurity",
-  "Cloud Computing",
-  "Blockchain",
-  "Data Analytics",
-  "Entrepreneurship",
-  "Marketing Strategy"
+  "Website Design & Conversion",
+  "E-commerce & Online Payments",
+  "SEO & Search Visibility",
+  "AI Search & Content Strategy",
+  "Social Media & Content Workflows",
+  "Digital Marketing Strategy",
+  "Brand Identity & Positioning",
+  "Business Automation & Tools"
 ];

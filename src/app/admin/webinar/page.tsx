@@ -15,7 +15,8 @@ import {
     Mail,
     Phone,
     MapPin,
-    Briefcase
+    Briefcase,
+    Download
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
@@ -36,6 +37,10 @@ interface WebinarRegistration {
     state?: string;
     city?: string;
     industry: string;
+    timezone?: string;
+    howDidYouHear?: string;
+    topicsOfInterest?: string[];
+    subscribeUpdates?: boolean;
     createdAt: string;
 }
 
@@ -120,6 +125,62 @@ export default function WebinarManagementPage() {
         } finally {
             setIsDeleteModalOpen(false);
         }
+    };
+
+    const exportRegistrantsCsv = (webinar: Webinar) => {
+        const registrations = webinar.registrations || [];
+        if (registrations.length === 0) return;
+
+        const escapeCsv = (val: string | boolean | undefined | null) => {
+            const str = val === undefined || val === null ? '' : String(val);
+            return `"${str.replace(/"/g, '""')}"`;
+        };
+
+        const headers = [
+            'First Name',
+            'Last Name',
+            'Email',
+            'Phone',
+            'Job Title',
+            'Company',
+            'Country',
+            'State',
+            'City',
+            'Industry',
+            'Timezone',
+            'Topics of Interest',
+            'How Did You Hear',
+            'Subscribed to Updates',
+            'Registered At'
+        ];
+
+        const rows = registrations.map((reg) => [
+            reg.firstName,
+            reg.lastName,
+            reg.email,
+            reg.phone,
+            reg.jobTitle,
+            reg.companyName,
+            reg.country,
+            reg.state,
+            reg.city,
+            reg.industry,
+            reg.timezone,
+            reg.topicsOfInterest?.join('; '),
+            reg.howDidYouHear,
+            reg.subscribeUpdates ? 'Yes' : 'No',
+            reg.createdAt
+        ].map(escapeCsv).join(','));
+
+        const csvContent = [headers.map(escapeCsv).join(','), ...rows].join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        const slug = webinar.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        link.href = url;
+        link.download = `${slug || 'webinar'}-registrants.csv`;
+        link.click();
+        URL.revokeObjectURL(url);
     };
 
     if (isLoading) {
@@ -247,16 +308,28 @@ export default function WebinarManagementPage() {
                         className="fixed inset-y-0 right-0 z-[60] flex h-full w-full max-w-3xl flex-col bg-slate-50 shadow-2xl focus:outline-none animate-in slide-in-from-right duration-300"
                     >
                     {selectedWebinarWithRegistrants && (<>
-                        <div className="bg-white border-b border-gray-100 p-6 flex items-center justify-between sticky top-0 z-10">
+                        <div className="bg-white border-b border-gray-100 p-6 flex items-center justify-between gap-4 sticky top-0 z-10">
                             <div>
                                 <DialogPrimitive.Title className="text-xl font-bold text-gray-900">Webinar Registrations</DialogPrimitive.Title>
                                 <p className="text-sm text-gray-500">{selectedWebinarWithRegistrants.title}</p>
                             </div>
-                            <DialogPrimitive.Close asChild>
-                                <Button variant="ghost" size="icon" aria-label="Close registrations panel" className="h-11 w-11">
-                                    <ChevronRight className="w-6 h-6" aria-hidden="true" />
+                            <div className="flex items-center gap-2">
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => exportRegistrantsCsv(selectedWebinarWithRegistrants)}
+                                    disabled={!selectedWebinarWithRegistrants.registrations?.length}
+                                    className="gap-2 h-10 px-4 border-gray-200"
+                                >
+                                    <Download className="w-4 h-4" />
+                                    Export CSV
                                 </Button>
-                            </DialogPrimitive.Close>
+                                <DialogPrimitive.Close asChild>
+                                    <Button variant="ghost" size="icon" aria-label="Close registrations panel" className="h-11 w-11">
+                                        <ChevronRight className="w-6 h-6" aria-hidden="true" />
+                                    </Button>
+                                </DialogPrimitive.Close>
+                            </div>
                         </div>
                         
                         <div className="flex-1 overflow-y-auto p-6 space-y-4">
