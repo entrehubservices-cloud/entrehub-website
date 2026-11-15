@@ -50,10 +50,17 @@ export async function POST(request: NextRequest) {
     const webinarDate = new Date(webinar.scheduledAt);
     const endDate = new Date(webinarDate.getTime() + 60 * 60 * 1000); // 1 hour duration
 
+    const calendarDescription = [
+      webinar.description || "Join us for a live session with Entrehub Services.",
+      webinar.meetingLink ? `Google Meet link: ${webinar.meetingLink}` : null,
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
     const calendarLinks = generateCalendarLinks({
       title: webinar.title,
-      description: webinar.description || "Join us for an insightful session on business growth strategies.",
-      location: "Online (Link to be sent via email)",
+      description: calendarDescription,
+      location: webinar.meetingLink || "Google Meet (link to be sent via email)",
       startTime: webinarDate,
       endTime: endDate,
     });
@@ -62,6 +69,9 @@ export async function POST(request: NextRequest) {
     await sendWebinarConfirmation({
       email: validatedData.email,
       firstName: validatedData.firstName,
+      webinarTitle: webinar.title,
+      scheduledAt: webinarDate,
+      meetingLink: webinar.meetingLink,
       calendarLinks,
     });
 
