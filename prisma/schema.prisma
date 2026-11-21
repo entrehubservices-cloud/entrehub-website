@@ -178,49 +178,76 @@ model TeamMember {
 
 // Webinar Registration Model
 model WebinarRegistration {
-  id                String   @id @default(cuid())
-  firstName         String
-  lastName          String
-  email             String
-  phone             String?
-  jobTitle          String?
-  companyName       String?
-  country           String
-  state             String?
-  city              String?
-  industry          String
-  timezone          String
-  howDidYouHear     String?
-  topicsOfInterest  String[] // Array of strings
-  agreeToTerms      Boolean
-  subscribeUpdates  Boolean  @default(false)
-  
-  // Relation to Webinar
-  webinarId         String?
-  webinar           Webinar? @relation(fields: [webinarId], references: [id])
-  
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id                  String    @id @default(cuid())
+  firstName           String
+  lastName            String
+  email               String
+  phone               String?
+  jobTitle            String?
+  companyName         String?
+  country             String
+  state               String?
+  city                String?
+  industry            String
+  timezone            String
+  howDidYouHear       String?
+  topicsOfInterest    String[]  // Array of strings
+  agreeToTerms        Boolean
+  subscribeUpdates    Boolean   @default(false)
+  emailDeliveryStatus String    @default("NOT_CONFIGURED")
+  emailDeliveryError  String?
+  emailSentAt         DateTime?
+  reminderSentAt      DateTime?
 
+  // Relation to Webinar
+  webinarId           String?
+  webinar             Webinar?  @relation(fields: [webinarId], references: [id], onDelete: Cascade)
+
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  @@unique([webinarId, email])
   @@index([email])
   @@index([createdAt])
   @@index([webinarId])
 }
 
-// Webinar Model
+// Webinar & Event Model
 model Webinar {
-  id                String   @id @default(cuid())
-  title             String
-  description       String?  @db.Text
-  scheduledAt       DateTime
-  meetingLink       String?
-  isActive          Boolean  @default(true)
-  
-  registrations     WebinarRegistration[]
-  
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id                      String    @id @default(cuid())
+  slug                    String?   @unique
+  title                   String
+  shortSummary            String?   @db.Text
+  description             String?   @db.Text
+  category                String    @default("Webinar")
+  coverImage              String?
+  scheduledAt             DateTime
+  endsAt                  DateTime?
+  timezone                String    @default("Africa/Lagos")
+  format                  String    @default("ONLINE")
+  meetingLink             String?
+  location                String?
+  speakerName             String?
+  speakerTitle            String?
+  speakerBio              String?   @db.Text
+  capacity                Int?
+  registrationClosesAt    DateTime?
+  status                  String    @default("DRAFT")
+  isActive                Boolean   @default(true)
+  isFree                  Boolean   @default(true)
+  remindersEnabled        Boolean   @default(false)
+  googleCalendarEventId   String?
+  googleCalendarHtmlLink  String?
+  googleMeetRequestId     String?
+  googleCalendarSyncedAt  DateTime?
+  googleCalendarLastError String?
+
+  registrations           WebinarRegistration[]
+
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
 
   @@index([isActive])
+  @@index([status])
   @@index([scheduledAt])
 }

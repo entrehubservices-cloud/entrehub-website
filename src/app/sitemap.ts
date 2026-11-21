@@ -6,20 +6,32 @@ export const dynamic = 'force-dynamic';
 const origin = 'https://www.entrehubng.com';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await prisma.blogPost.findMany({
-    where: { published: true },
-    select: { slug: true, updatedAt: true },
-    orderBy: { publishedAt: 'desc' },
-  });
+  const [posts, events] = await Promise.all([
+    prisma.blogPost.findMany({
+      where: { published: true },
+      select: { slug: true, updatedAt: true },
+      orderBy: { publishedAt: 'desc' },
+    }),
+    prisma.webinar.findMany({
+      where: { OR: [{ status: 'PUBLISHED' }, { isActive: true }] },
+      select: { id: true, slug: true, updatedAt: true },
+      orderBy: { scheduledAt: 'desc' },
+    }),
+  ]);
   return [
     { url: origin + '/' },
     { url: origin + '/blog' },
+    { url: origin + '/events' },
     { url: origin + '/privacy' },
     { url: origin + '/terms' },
     ...servicePages.map(service => ({ url: origin + '/services/' + service.slug })),
     ...posts.map(post => ({
       url: origin + '/blog/' + encodeURIComponent(post.slug),
       lastModified: post.updatedAt,
+    })),
+    ...events.map(event => ({
+      url: origin + '/events/' + encodeURIComponent(event.slug || event.id),
+      lastModified: event.updatedAt,
     })),
   ];
 }

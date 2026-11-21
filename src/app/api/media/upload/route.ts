@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
                 const user = sessionToken ? await verifyToken(sessionToken) : null;
                 if (!user) throw new Error('Authentication required.');
 
-                if (!/^entrehub\/(blog|social|reels)\/[A-Za-z0-9._-]+$/.test(pathname)) {
+                if (!/^entrehub\/(blog|social|reels|events)\/[A-Za-z0-9._-]+$/.test(pathname)) {
                     throw new Error('Invalid media path.');
                 }
 

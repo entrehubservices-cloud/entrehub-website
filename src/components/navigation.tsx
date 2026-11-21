@@ -11,6 +11,7 @@ const navItems = [
   { name: 'About', href: '/#about' },
   { name: 'Services', href: '/#services' },
   { name: 'Pricing', href: '/pricing' },
+  { name: 'Events', href: '/events' },
   { name: 'Work', href: '/#work' },
   { name: 'Blog', href: '/blog' },
 ];
