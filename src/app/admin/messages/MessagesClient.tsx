@@ -21,6 +21,8 @@ interface Message {
     name: string;
     email: string;
     phone?: string;
+    company?: string;
+    inquiryType?: string;
     message: string;
     status: 'UNREAD' | 'READ' | 'REPLIED' | 'ARCHIVED';
     notes?: string;
@@ -214,9 +216,15 @@ export default function MessagesClient() {
                             <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/30">
                                 <div>
                                     <h3 className="text-xl font-bold text-gray-900">{selectedMessage.name}</h3>
-                                    <div className="flex items-center gap-4 text-sm text-gray-500 mt-1">
+                                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500 mt-1">
                                         <span>{selectedMessage.email}</span>
                                         {selectedMessage.phone && <span>• {selectedMessage.phone}</span>}
+                                        {selectedMessage.company && <span>• {selectedMessage.company}</span>}
+                                        {selectedMessage.inquiryType && (
+                                            <span className="rounded-full bg-navy-tint px-2.5 py-0.5 text-xs font-semibold text-navy">
+                                                {selectedMessage.inquiryType}
+                                            </span>
+                                        )}
                                         <span>• {format(new Date(selectedMessage.createdAt), 'MMM dd, yyyy HH:mm')}</span>
                                     </div>
                                 </div>

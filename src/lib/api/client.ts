@@ -133,6 +133,8 @@ export async function submitContactForm(data: {
     name: string;
     email: string;
     phone?: string;
+    company?: string;
+    inquiryType?: string;
     message: string;
 }) {
     const res = await fetch(`${API_BASE_URL}/api/contact`, {

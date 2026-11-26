@@ -52,7 +52,7 @@ export default function WorkSection() {
           id="work-heading"
           eyebrow="Selected work"
           title={<>Our <span className="text-navy">portfolio</span></>}
-          description="A selection of websites, campaigns and creative work delivered by Entrehub Services."
+          description="A selection of websites, platforms, campaigns and digital systems delivered by ENTREHUB SERVICES LTD."
         />
 
         {isLoading ? (

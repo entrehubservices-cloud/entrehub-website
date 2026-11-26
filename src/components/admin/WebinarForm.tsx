@@ -593,7 +593,7 @@ export default function WebinarForm({
                   <Label htmlFor="speakerTitle">Speaker Role / Title</Label>
                   <Input
                     id="speakerTitle"
-                    placeholder="e.g., Entrehub Services"
+                    placeholder="e.g., ENTREHUB SERVICES LTD"
                     value={speakerTitle}
                     onChange={(e) => setSpeakerTitle(e.target.value)}
                   />

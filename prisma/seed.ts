@@ -564,7 +564,7 @@ async function main() {
     const serviceData = [
         {
             title: 'Web & App Development',
-            description: 'We develop digital assets, such as websites, microsite and mobile apps, for your business needs.',
+            description: 'We develop digital assets, such as websites, microsites and mobile apps, for your business needs.',
             icon: 'Globe',
             included: "What's included in service?",
             order: 1,
@@ -592,7 +592,7 @@ async function main() {
         },
         {
             title: 'Creative & Content',
-            description: 'We bring out of the box creative contents that matter to your audience & business growth.',
+            description: 'We bring out-of-the-box creative content that matters to your audience & business growth.',
             icon: 'Palette',
             included: "What's included in service?",
             order: 5,

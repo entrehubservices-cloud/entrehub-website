@@ -37,7 +37,7 @@ export async function generateMetadata(props: {
   const description =
     record.shortSummary ||
     record.description?.slice(0, 160) ||
-    "Free event hosted by Entrehub Services.";
+    "Free event hosted by ENTREHUB SERVICES LTD.";
   return {
     title: record.title,
     description,
@@ -97,7 +97,7 @@ export default async function EventDetailPage(props: {
             isAccessibleForFree: true,
             organizer: {
               "@type": "Organization",
-              name: "Entrehub Services",
+              name: "ENTREHUB SERVICES LTD",
               url: siteUrl,
             },
           }),

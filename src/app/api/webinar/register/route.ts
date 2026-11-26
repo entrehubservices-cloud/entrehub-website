@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
     const calendarDescription = [
       webinar.description ||
         webinar.shortSummary ||
-        "Join us for a live session with Entrehub Services.",
+        "Join us for a live session with ENTREHUB SERVICES LTD.",
       webinar.meetingLink ? `Google Meet link: ${webinar.meetingLink}` : null,
     ]
       .filter(Boolean)
