@@ -97,7 +97,7 @@ export function buildIcsInvite({
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Entrehub Services//Events//EN",
+    "PRODID:-//ENTREHUB SERVICES LTD//Events//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
@@ -202,7 +202,7 @@ export async function sendWebinarConfirmation({
           title: webinarTitle,
           description: meetingLink
             ? `Join via Google Meet: ${meetingLink}`
-            : `Entrehub Services event (${location || "Online"})`,
+            : `ENTREHUB SERVICES LTD event (${location || "Online"})`,
           location: meetingLink || location || "Online",
           startTime: scheduledAt,
           endTime: endsAt || new Date(scheduledAt.getTime() + 60 * 60 * 1000),
@@ -238,7 +238,7 @@ export async function sendWebinarConfirmation({
           <a href="${calendarLinks.google}" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; margin-right: 10px; display: inline-block;">Add to Google Calendar</a>
           <a href="${calendarLinks.outlook}" style="background: #0f172a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block;">Add to Outlook</a>
         </div>
-        <p>Best regards,<br>Entrehub Services</p>
+        <p>Best regards,<br>ENTREHUB SERVICES LTD</p>
       </div>
     `,
     ...(icsContent

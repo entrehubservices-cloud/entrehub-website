@@ -14,6 +14,7 @@ const navItems = [
   { name: 'Events', href: '/events' },
   { name: 'Work', href: '/#work' },
   { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 export default function Navigation() {

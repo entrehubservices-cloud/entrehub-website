@@ -16,6 +16,14 @@ import {
   createOrUpdateWebinarCalendarEvent,
   buildGoogleMeetRequestId,
 } from "../src/lib/google-calendar";
+import { contactMessageSchema } from "../src/lib/validations/contact";
+import {
+  siteName,
+  companyRcNumber,
+  companyTaxId,
+  companyEmail,
+  companySocialUrls,
+} from "../src/lib/seo";
 
 describe("Event validation", () => {
   it("defaults timezone to Africa/Lagos and isFree to true", () => {
@@ -200,5 +208,27 @@ describe("Integration boundaries and failure handling", () => {
     if (!result.ok) {
       assert.equal(result.reason, "NOT_CONFIGURED");
     }
+  });
+});
+
+describe("Corporate compliance and B2B contact validation", () => {
+  it("exposes verified ENTREHUB SERVICES LTD corporate metadata and clean social URLs", () => {
+    assert.equal(siteName, "ENTREHUB SERVICES LTD");
+    assert.equal(companyRcNumber, "10030133");
+    assert.equal(companyTaxId, "2621823441002");
+    assert.equal(companyEmail, "info@entrehubng.com");
+    assert.equal(companySocialUrls.instagram.includes("srtk="), false);
+  });
+
+  it("validates optional B2B company and inquiryType fields in contact submissions", () => {
+    const parsed = contactMessageSchema.parse({
+      name: "Chinedu Eze",
+      email: "chinedu@enterprise.ng",
+      company: "Apex Infrastructure Ltd",
+      inquiryType: "Corporate Profile & Capability Statement",
+      message: "Please send your capability statement.",
+    });
+    assert.equal(parsed.company, "Apex Infrastructure Ltd");
+    assert.equal(parsed.inquiryType, "Corporate Profile & Capability Statement");
   });
 });

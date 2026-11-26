@@ -13,10 +13,10 @@ import BlogPageClient from './BlogPageClient';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Websites, SEO & Digital Marketing Insights',
-  description: 'Explore website, SEO, social media and email marketing insights from Entrehub Services for personal brands and growing businesses.',
+  title: 'Websites, ICT, SEO & Digital Growth Insights',
+  description: 'Explore ICT, software, website, SEO, and digital marketing insights from ENTREHUB SERVICES LTD for enterprises and growing brands.',
   alternates: { canonical: '/blog' },
-  openGraph: { type: 'website', url: '/blog', title: 'Websites, SEO & Digital Marketing Insights', description: 'Website and digital marketing insights from Entrehub Services.' },
+  openGraph: { type: 'website', url: '/blog', title: 'Websites, ICT, SEO & Digital Growth Insights | ENTREHUB SERVICES LTD', description: 'Digital systems, website, and growth insights from ENTREHUB SERVICES LTD.' },
 };
 
 export default async function BlogPage() {

@@ -1,3 +1,5 @@
+import { getSavedCookieConsent } from '@/components/cookie-consent';
+
 export type ContactMethod = 'phone' | 'whatsapp';
 
 type EnquiryEvent = 'generate_lead' | 'phone_click' | 'whatsapp_click';
@@ -11,6 +13,7 @@ declare global {
 /** Send only fixed labels, never visitor details, form values or destination URLs. */
 function sendEnquiryEvent(name: EnquiryEvent, method: string) {
   if (typeof window === 'undefined' || window.location.pathname.startsWith('/admin')) return;
+  if (getSavedCookieConsent() !== 'accepted') return;
   try {
     window.gtag?.('event', name, {
       send_to: 'G-9C76MQETJS',

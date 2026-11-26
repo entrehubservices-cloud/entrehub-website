@@ -287,7 +287,7 @@ export default function EventRegistrationForm({
             htmlFor="agreeToTerms"
             className="text-xs leading-relaxed text-slate-600 cursor-pointer"
           >
-            I agree to Entrehub Services using my registration details to manage my
+            I agree to ENTREHUB SERVICES LTD using my registration details to manage my
             attendance for this event in line with the{' '}
             <Link href="/privacy" className="font-semibold text-navy underline">
               Privacy Policy
@@ -306,7 +306,7 @@ export default function EventRegistrationForm({
             htmlFor="subscribeUpdates"
             className="text-xs leading-relaxed text-slate-600 cursor-pointer"
           >
-            Send me occasional updates about future Entrehub Services events (optional).
+            Send me occasional updates about future ENTREHUB SERVICES LTD events (optional).
           </Label>
         </div>
       </div>

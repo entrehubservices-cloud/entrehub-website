@@ -13,14 +13,14 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Webinars & Events",
   description:
-    "Free webinars, workshops, and live clinics from Entrehub Services on websites, e-commerce, SEO, and digital growth.",
+    "Free webinars, workshops, and live clinics from ENTREHUB SERVICES LTD on enterprise ICT, websites, e-commerce, SEO, and digital growth.",
   alternates: { canonical: "/events" },
   openGraph: {
     type: "website",
     url: "/events",
-    title: "Webinars & Events | Entrehub Services",
+    title: "Webinars & Events | ENTREHUB SERVICES LTD",
     description:
-      "Join free upcoming webinars and workshops hosted by Entrehub Services.",
+      "Join free upcoming webinars and workshops hosted by ENTREHUB SERVICES LTD.",
   },
 };
 
@@ -105,7 +105,7 @@ function EventCard({ event }: { event: PublicEventDTO }) {
 
         <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
           <span className="text-xs font-medium text-slate-500">
-            {event.speakerName ? `Hosted by ${event.speakerName}` : "Entrehub Services"}
+            {event.speakerName ? `Hosted by ${event.speakerName}` : "ENTREHUB SERVICES LTD"}
           </span>
           <Link
             href={`/events/${event.slug}`}

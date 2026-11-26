@@ -1,23 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X, Send, Check } from "lucide-react";
 import { submitContactForm } from "@/lib/api/client";
+import { contactInquiryTypes } from "@/lib/validations/contact";
 
 interface MessageFormModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialInquiryType?: string;
 }
 
 export default function MessageFormModal({
   isOpen,
   onClose,
+  initialInquiryType,
 }: MessageFormModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    company: "",
+    inquiryType: initialInquiryType || "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,6 +30,15 @@ export default function MessageFormModal({
     "idle" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    if (isOpen && initialInquiryType) {
+      setFormData((prev) => ({
+        ...prev,
+        inquiryType: initialInquiryType,
+      }));
+    }
+  }, [isOpen, initialInquiryType]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,9 +49,15 @@ export default function MessageFormModal({
     try {
       await submitContactForm(formData);
       setSubmitStatus("success");
-      setFormData({ name: "", email: "", phone: "", message: "" });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        inquiryType: "",
+        message: "",
+      });
 
-      // Auto-close after 2 seconds on success
       setTimeout(() => {
         onClose();
         setSubmitStatus("idle");
@@ -55,8 +75,14 @@ export default function MessageFormModal({
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
+    if (submitStatus === "error") {
+      setSubmitStatus("idle");
+      setErrorMessage("");
+    }
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -72,191 +98,227 @@ export default function MessageFormModal({
         <Dialog.Overlay className="fixed inset-0 z-[110] bg-navy-deep/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in-0" />
         <Dialog.Content
           aria-describedby={undefined}
-          className="fixed left-1/2 top-1/2 z-[110] max-h-[90vh] w-[calc(100%-2rem)] max-w-3xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white shadow-2xl focus:outline-none data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
+          className="fixed left-1/2 top-1/2 z-[110] max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-3xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto overscroll-contain rounded-2xl bg-white shadow-2xl focus:outline-none data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95"
         >
           <Dialog.Close
             aria-label="Close"
             disabled={isSubmitting}
-            className="absolute right-3 top-3 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/80 text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 disabled:opacity-50"
+            className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 disabled:opacity-50"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </Dialog.Close>
 
-          <div className="grid md:grid-cols-2">
-            {/* Left Side - Image */}
-            <div className="relative hidden bg-navy-deep p-8 md:flex md:flex-col md:justify-center">
+          <div className="grid md:grid-cols-[0.85fr_1.15fr]">
+            <div className="relative hidden bg-navy-deep p-7 md:flex md:flex-col md:justify-center">
               <div className="relative z-10">
-                <p className="text-3xl font-bold text-white mb-4">
+                <p className="mb-2 text-xs font-bold uppercase tracking-widest text-amber-300">
+                  ENTREHUB SERVICES LTD
+                </p>
+                <p className="text-2xl font-bold text-white mb-3">
                   Let&apos;s Connect
                 </p>
-                <p className="text-slate-300 mb-6">
-                  Have a question or want to work together? Drop us a message
-                  and we&apos;ll get back to you as soon as possible.
+                <p className="text-sm leading-6 text-slate-300 mb-5">
+                  Share your project scope, RFP, or request our Corporate Profile &amp; Capability Statement.
                 </p>
-                <ul className="space-y-3 text-slate-200">
+                <ul className="space-y-2.5 text-sm text-slate-200">
                   <li className="flex items-center gap-2">
-                    <Check
-                      className="h-4 w-4 text-orange-400"
-                      aria-hidden="true"
-                    />
-                    Quick response time
+                    <Check className="h-4 w-4 text-orange-400" aria-hidden="true" />
+                    Prompt executive response
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check
-                      className="h-4 w-4 text-orange-400"
-                      aria-hidden="true"
-                    />
-                    Professional support
+                    <Check className="h-4 w-4 text-orange-400" aria-hidden="true" />
+                    Clear SOW &amp; governance
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check
-                      className="h-4 w-4 text-orange-400"
-                      aria-hidden="true"
-                    />
-                    Tailored solutions
+                    <Check className="h-4 w-4 text-orange-400" aria-hidden="true" />
+                    Global remote &amp; on-site delivery
                   </li>
                 </ul>
               </div>
             </div>
 
-            {/* Right Side - Form */}
-            <div className="p-6 sm:p-8">
-              <Dialog.Title className="text-2xl font-bold text-slate-900 mb-2">
+            <div className="p-5 sm:p-6">
+              <Dialog.Title className="text-xl font-bold text-slate-900 mb-1 pr-8">
                 Send us a message
               </Dialog.Title>
-              <p className="mb-6 text-sm text-slate-600">
+              <p className="mb-4 text-xs text-slate-600">
                 Fields marked <span aria-hidden="true">*</span>
                 <span className="sr-only">with an asterisk</span> are required.
               </p>
 
               <div role="status" aria-live="polite">
                 {submitStatus === "success" && (
-                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                    <p className="text-green-800 font-medium">
+                  <div className="mb-4 p-3.5 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-green-800 text-sm font-semibold">
                       Message sent successfully!
                     </p>
-                    <p className="text-green-700 text-sm">
-                      We&apos;ll get back to you soon.
+                    <p className="text-green-700 text-xs">
+                      Our team at ENTREHUB SERVICES LTD will respond shortly.
                     </p>
                   </div>
                 )}
               </div>
               <div role="alert">
                 {submitStatus === "error" && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <p className="text-red-800 font-medium">{errorMessage}</p>
+                  <div className="mb-4 p-3.5 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-800 text-sm font-medium">{errorMessage}</p>
                   </div>
                 )}
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-slate-800 mb-2"
-                  >
-                    Name{" "}
-                    <span className="text-red-700" aria-hidden="true">
-                      *
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    autoComplete="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-400 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy disabled:bg-gray-100 disabled:cursor-not-allowed"
-                    placeholder="Your name"
-                  />
+              <form onSubmit={handleSubmit} className="space-y-3">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="modal-name"
+                      className="block text-xs font-medium text-slate-800 mb-1"
+                    >
+                      Name{" "}
+                      <span className="text-red-700" aria-hidden="true">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="modal-name"
+                      name="name"
+                      autoComplete="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      className="w-full min-h-11 px-3 py-2 text-base rounded-lg border border-slate-400 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy disabled:bg-gray-100"
+                      placeholder="Your full name"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="modal-email"
+                      className="block text-xs font-medium text-slate-800 mb-1"
+                    >
+                      Email{" "}
+                      <span className="text-red-700" aria-hidden="true">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="modal-email"
+                      name="email"
+                      autoComplete="email"
+                      autoCorrect="off"
+                      autoCapitalize="none"
+                      spellCheck={false}
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      className="w-full min-h-11 px-3 py-2 text-base rounded-lg border border-slate-400 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy disabled:bg-gray-100"
+                      placeholder="you@company.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="modal-company"
+                      className="block text-xs font-medium text-slate-800 mb-1"
+                    >
+                      Company / Organization (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      id="modal-company"
+                      name="company"
+                      autoComplete="organization"
+                      value={formData.company}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className="w-full min-h-11 px-3 py-2 text-base rounded-lg border border-slate-400 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy disabled:bg-gray-100"
+                      placeholder="Organisation name"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="modal-phone"
+                      className="block text-xs font-medium text-slate-800 mb-1"
+                    >
+                      Phone (Optional)
+                    </label>
+                    <input
+                      type="tel"
+                      id="modal-phone"
+                      name="phone"
+                      autoComplete="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className="w-full min-h-11 px-3 py-2 text-base rounded-lg border border-slate-400 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy disabled:bg-gray-100"
+                      placeholder="+234..."
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-slate-800 mb-2"
+                    htmlFor="modal-inquiryType"
+                    className="block text-xs font-medium text-slate-800 mb-1"
                   >
-                    Email{" "}
-                    <span className="text-red-700" aria-hidden="true">
-                      *
-                    </span>
+                    Project / Inquiry Type (Optional)
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    autoComplete="email"
-                    value={formData.email}
+                  <select
+                    id="modal-inquiryType"
+                    name="inquiryType"
+                    value={formData.inquiryType}
                     onChange={handleChange}
-                    required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-400 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy disabled:bg-gray-100 disabled:cursor-not-allowed"
-                    placeholder="your@email.com"
-                  />
+                    className="w-full min-h-11 px-3 py-2 text-base rounded-lg border border-slate-400 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy disabled:bg-gray-100"
+                  >
+                    <option value="">Select an inquiry type…</option>
+                    {contactInquiryTypes.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>
                   <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-slate-800 mb-2"
-                  >
-                    Phone (Optional)
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    autoComplete="tel"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-400 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy disabled:bg-gray-100 disabled:cursor-not-allowed"
-                    placeholder="+234 123 456 7890"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-slate-800 mb-2"
+                    htmlFor="modal-message"
+                    className="block text-xs font-medium text-slate-800 mb-1"
                   >
                     Message{" "}
-                    <span className="text-red-700" aria-hidden="true">
-                      *
-                    </span>
+                    <span className="text-red-700" aria-hidden="true">*</span>
                   </label>
                   <textarea
-                    id="message"
+                    id="modal-message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-400 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
-                    placeholder="Tell us about your project or inquiry..."
+                    rows={3}
+                    className="w-full px-3 py-2 text-base rounded-lg border border-slate-400 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy resize-y disabled:bg-gray-100"
+                    placeholder="Tell us about your project, scope, or inquiry..."
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full min-h-12 bg-navy text-white font-semibold py-3 px-6 rounded-lg hover:bg-navy-hover transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full min-h-11 bg-navy text-white text-sm font-semibold py-2.5 px-6 rounded-lg hover:bg-navy-hover transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
                       <span
-                        className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
+                        className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"
                         aria-hidden="true"
                       />
                       Sending...
                     </>
                   ) : (
                     <>
-                      <Send className="w-5 h-5" aria-hidden="true" />
+                      <Send className="w-4 h-4" aria-hidden="true" />
                       Send Message
                     </>
                   )}

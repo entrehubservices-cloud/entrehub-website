@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     ...(post.publishedAt ? { datePublished: post.publishedAt } : {}),
                     ...(post.editorialUpdatedAt ? { dateModified: post.editorialUpdatedAt } : {}),
                     author: { '@type': 'Person', name: post.author.name },
-                    publisher: { '@type': 'Organization', '@id': siteUrl + '/#business', name: 'Entrehub Services', url: siteUrl, logo: { '@type': 'ImageObject', url: siteUrl + '/images/logo.jpeg' } },
+                    publisher: { '@type': 'Organization', '@id': siteUrl + '/#business', name: 'ENTREHUB', legalName: 'ENTREHUB SERVICES LTD', url: siteUrl, logo: { '@type': 'ImageObject', url: siteUrl + '/images/logo.jpeg' } },
                     articleSection: post.category.name, keywords: post.tags.map(tag => tag.name).join(', '), inLanguage: 'en' },
                   { '@type': 'BreadcrumbList', itemListElement: [
                     { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl + '/' },

@@ -1,17 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRight, ArrowUpRight, Code2, Search, Share2, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Code2, FileText, Search, Share2, Sparkles } from 'lucide-react';
 import { League_Spartan } from 'next/font/google';
+import Link from 'next/link';
 import ContactModal from './contact-modal';
 
 const heroFont = League_Spartan({ subsets: ['latin'], weight: ['800'], display: 'swap' });
-
-const services = [
-  { label: 'Web', Icon: Code2, className: 'hub-node--web' },
-  { label: 'Search', Icon: Search, className: 'hub-node--search' },
-  { label: 'Content', Icon: Share2, className: 'hub-node--content' },
-];
 
 export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,21 +28,21 @@ export default function HeroSection() {
           <div className="relative z-10 max-w-2xl">
             <p className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-blue-100 sm:text-xs">
               <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_14px_rgba(251,191,36,0.8)]" aria-hidden="true" />
-              Digital partner for ambitious brands
+              Enterprise ICT · Software &amp; AI · Digital Growth
             </p>
 
             <h1
               id="hero-heading"
               className={`${heroFont.className} mb-5 max-w-[13ch] text-[3.15rem] font-extrabold leading-[0.94] tracking-[-0.045em] text-white motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-5 motion-safe:duration-700 sm:text-[4.5rem] lg:text-[4.65rem] xl:text-[5.15rem]`}
             >
-              Your digital presence, <span className="text-amber-300">working as one.</span>
+              Your digital &amp; ICT systems, <span className="text-amber-300">working as one.</span>
             </h1>
 
             <p className="mb-7 max-w-xl text-base leading-7 text-blue-50/80 sm:text-lg sm:leading-8">
-              From your website to search visibility and content, we connect the pieces into a clear experience for customers worldwide.
+              ENTREHUB SERVICES LTD partners with enterprises, public institutions, and growing brands worldwide across ICT consulting, custom software and AI systems, digital growth, and general contracting.
             </p>
 
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <button
                 type="button"
                 onClick={() => setIsModalOpen(true)}
@@ -57,16 +52,22 @@ export default function HeroSection() {
                 Start a conversation
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </button>
-              <a
-                href="#services"
-                className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/25 bg-white/[0.04] px-6 text-sm font-semibold text-white transition duration-200 hover:border-white/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              <Link
+                href="/contact?inquiry=Corporate+Profile+%26+Capability+Statement"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/[0.04] px-5 text-sm font-semibold text-white transition duration-200 hover:border-white/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
-                Explore our services
-              </a>
+                <FileText className="h-4 w-4 text-amber-300" aria-hidden="true" />
+                Request Corporate Profile
+              </Link>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-blue-100/80 sm:text-sm" aria-label="Areas of work">
-              {['Web & app development', 'SEO', 'Digital marketing'].map((item) => (
+              {[
+                'Enterprise ICT Consulting',
+                'Custom Software & AI',
+                'Web, SEO & Digital Growth',
+                'Institutional Contracting',
+              ].map((item) => (
                 <span key={item} className="inline-flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-300" aria-hidden="true" />
                   {item}
@@ -92,24 +93,24 @@ export default function HeroSection() {
 
               <div className="hub-node hub-node--web">
                 <span className="hub-node__icon"><Code2 className="h-4 w-4" /></span>
-                <span>Web</span>
+                <span>Systems</span>
               </div>
               <div className="hub-node hub-node--search">
                 <span className="hub-node__icon"><Search className="h-4 w-4" /></span>
-                <span>Search</span>
+                <span>ICT &amp; AI</span>
               </div>
               <div className="hub-node hub-node--content">
                 <span className="hub-node__icon"><Share2 className="h-4 w-4" /></span>
-                <span>Content</span>
+                <span>Growth</span>
               </div>
 
               <div className="absolute inset-x-5 top-5 flex items-center justify-between sm:inset-x-7 sm:top-7">
                 <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/75 sm:text-xs">
                   <Sparkles className="h-4 w-4 text-amber-300" />
-                  ENTREHUB / DIGITAL STUDIO
+                  ENTREHUB SERVICES LTD
                 </span>
                 <span className="rounded-full border border-white/15 bg-white/[0.05] px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.16em] text-blue-100/80 sm:text-[10px]">
-                  Strategy · Design · Delivery
+                  RC 10030133
                 </span>
               </div>
 
@@ -117,7 +118,7 @@ export default function HeroSection() {
                 <div>
                   <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300/90">Connected by design</p>
                   <p className="max-w-[15rem] text-lg font-bold leading-tight tracking-tight text-white sm:text-2xl">
-                    One clear path from idea to online.
+                    Strategy, engineering &amp; reliable delivery.
                   </p>
                 </div>
                 <span className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-amber-300 sm:flex">

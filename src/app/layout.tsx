@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Script from "next/script";
 import EnquiryTracking from "@/components/enquiry-tracking";
+import CookieConsentManager from "@/components/cookie-consent";
 import "./globals.css";
 
 const inter = Inter({
@@ -12,10 +12,25 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.entrehubng.com'),
-  title: { default: 'Web Development & Digital Marketing | Entrehub Services', template: '%s | Entrehub Services' },
-  description: 'Websites, apps, SEO, social media and email marketing for personal brands and growing businesses. Work with Entrehub Services wherever your business is based.',
-  openGraph: { type: 'website', siteName: 'Entrehub Services', title: 'Entrehub Services', description: 'Web development and digital marketing for brands worldwide.' },
-  twitter: { card: 'summary', title: 'Entrehub Services', description: 'Web development and digital marketing for growing brands.' },
+  title: {
+    default: 'Enterprise ICT, Digital Systems & Growth | ENTREHUB SERVICES LTD',
+    template: '%s | ENTREHUB SERVICES LTD',
+  },
+  description:
+    'Enterprise ICT consulting, custom software and AI systems, websites, e-commerce, SEO, digital marketing, and corporate general contracting by ENTREHUB SERVICES LTD.',
+  openGraph: {
+    type: 'website',
+    siteName: 'ENTREHUB SERVICES LTD',
+    title: 'ENTREHUB SERVICES LTD',
+    description:
+      'Enterprise ICT consulting, custom software, digital growth, and institutional contracting delivered globally.',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'ENTREHUB SERVICES LTD',
+    description:
+      'Enterprise ICT consulting, software & AI systems, web development, and digital growth.',
+  },
 };
 
 export default function RootLayout({
@@ -29,47 +44,7 @@ export default function RootLayout({
         className={`${inter.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-9C76MQETJS"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-9C76MQETJS');
-          `}
-        </Script>
-
-        {/* Meta Pixel Code */}
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '836073725799438');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-        <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=836073725799438&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
-        {/* End Meta Pixel Code */}
-
+        <CookieConsentManager />
         <EnquiryTracking />
         {children}
       </body>

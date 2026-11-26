@@ -20,16 +20,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
   return [
     { url: origin + '/' },
-    { url: origin + '/blog' },
+    { url: origin + '/pricing' },
+    { url: origin + '/contact' },
     { url: origin + '/events' },
-    { url: origin + '/privacy' },
+    { url: origin + '/blog' },
     { url: origin + '/terms' },
-    ...servicePages.map(service => ({ url: origin + '/services/' + service.slug })),
-    ...posts.map(post => ({
+    { url: origin + '/privacy' },
+    { url: origin + '/cookies' },
+    ...servicePages.map((service) => ({ url: origin + '/services/' + service.slug })),
+    ...posts.map((post) => ({
       url: origin + '/blog/' + encodeURIComponent(post.slug),
       lastModified: post.updatedAt,
     })),
-    ...events.map(event => ({
+    ...events.map((event) => ({
       url: origin + '/events/' + encodeURIComponent(event.slug || event.id),
       lastModified: event.updatedAt,
     })),
